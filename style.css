@@ -146,7 +146,11 @@ header {
 .monthDays:nth-child(7n-1) {
     color: aliceblue;
 }
+.monthDays:hover{
+    background: white;
+    border-radius: 2em;
 
+}
 .monthDays{
     display: flex;
     width: 13.7rem;

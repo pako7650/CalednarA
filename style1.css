@@ -146,6 +146,10 @@ header {
 .monthDays:nth-child(7n-1) {
     color: darkgray;
 }
+.monthDays:hover{
+    background: gainsboro;
+    border-radius: 2em;
+}
 
 .monthDays{
     display: flex;
