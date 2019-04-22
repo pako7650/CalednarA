@@ -89,6 +89,7 @@ header {
 
     justify-content: space-around;
     align-items: center;
+    color: darkgray;
     background: aliceblue;
     width: 20%;
     cursor: pointer;

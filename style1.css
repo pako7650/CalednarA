@@ -89,7 +89,8 @@ header {
 
     justify-content: space-around;
     align-items: center;
-    background: aliceblue;
+    color: aliceblue;
+    background: darkgray;
     width: 20%;
     cursor: pointer;
     border-radius: 2rem;
@@ -97,7 +98,7 @@ header {
 }
 .buttonsSpan:active {
     transform: scale(0.9);
-    background-color: aliceblue;
+    background-color: darkgray;
     /*color: aliceblue;*/
 }
 #date{
