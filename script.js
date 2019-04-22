@@ -59,6 +59,23 @@ if not adds 1 to counter which is used down below..*/
     let denNovi = '';
     let denStari = '';
 
+    document.onkeydown = function(e) {
+        switch (e.keyCode) {
+            case 37:
+                document.getElementById('leftArrow').click();
+                break;
+            // case 38:
+            //     alert('up');
+            //     break;
+            case 39:
+                document.getElementById('rightArrow').click();
+                break;
+            // case 40:
+            //     alert('down');
+            //     break;
+        }
+    };
+
 
     // if(event.target.id === "leftArrow"){
     dnite = range(moment().add(`${counter}`, 'month').daysInMonth());//displaying the days based on month
@@ -172,3 +189,4 @@ function changer (event) {
 
 // const nqkva = document.getElementById('dark');
 // nqkva.
+
