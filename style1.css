@@ -181,7 +181,7 @@ header {
 
 #foot {
     display: flex;
-    color: darkgray;
+    color: aliceblue;
     background-color: whitesmoke;
     justify-content: space-around;
     justify-items: center;
