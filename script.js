@@ -20,6 +20,22 @@ for (let arrow of arrows) {/* loop trough arrows variable to get both of them */
     arrow.addEventListener('click', clicker);/* while looping attach an event listener on each one, plus calling
     the clicker function*/
 }
+document.onkeydown = function(e) {//attaching keyboard events
+    switch (e.keyCode) {
+        case 37:
+            document.getElementById('leftArrow').click();
+            break;
+        // case 38:
+        //     alert('up');
+        //     break;
+        case 39:
+            document.getElementById('rightArrow').click();
+            break;
+        // case 40:
+        //     alert('down');
+        //     break;
+    }
+};
 let denStart = 0;
 let denEnd = 0;
 const prediOnload = Array(`${firstD}`-denStart-1)
@@ -59,22 +75,7 @@ if not adds 1 to counter which is used down below..*/
     let denNovi = '';
     let denStari = '';
 
-    document.onkeydown = function(e) {
-        switch (e.keyCode) {
-            case 37:
-                document.getElementById('leftArrow').click();
-                break;
-            // case 38:
-            //     alert('up');
-            //     break;
-            case 39:
-                document.getElementById('rightArrow').click();
-                break;
-            // case 40:
-            //     alert('down');
-            //     break;
-        }
-    };
+
 
 
     // if(event.target.id === "leftArrow"){
