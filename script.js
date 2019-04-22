@@ -152,7 +152,7 @@ function changer (event) {
     if(event.target.id == 'light'){
 
         document.getElementsByTagName("head")[0].childNodes[7]
-            .href = "http://localhost:63342/JS/theCalendar/style1.css"
+            .href = "style1.css"
         event.target.style.display = 'none';
         document.getElementById('dark').style.display = 'block';
 
@@ -161,7 +161,7 @@ function changer (event) {
     if(event.target.id == 'dark'){
 
         document.getElementsByTagName("head")[0].childNodes[7]
-            .href = "http://localhost:63342/JS/theCalendar/style.css"
+            .href = "style.css"
         event.target.style.display = 'none';
         document.getElementById('light').style.display = 'block';
 
