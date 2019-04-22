@@ -126,13 +126,11 @@ if not adds 1 to counter which is used down below..*/
     displayDate.innerHTML = moment().add(counter, 'month').format('MMMM YYYY');/*.. to change the date's inner text to
     previous or nex month*/
 
-
     // console.log(prazno);
     // console.log(secondDfull);
     // console.log(secondLastDfull);
     return ne6to
 }
-
 
 
 // const calendarDaysToHtml = (days, className) => {//Zaki's greatest hint
@@ -142,3 +140,35 @@ if not adds 1 to counter which is used down below..*/
 //
 //     return html;
 // };
+const modes = [...elementsByClass('theme')];//getting elements by class name
+// const  = getArrows('buttonsSpan');/* getting specific class name 'buttons */
+for (let mod of modes) {/* loop trough arrows variable to get both of them */
+
+    mod.addEventListener('click', changer);/* while looping attach an event listener on each one, plus calling
+    the clicker function*/
+}
+
+function changer (event) {
+    if(event.target.id == 'light'){
+
+        document.getElementsByTagName("head")[0].childNodes[7]
+            .href = "http://localhost:63342/JS/theCalendar/style1.css"
+        event.target.style.display = 'none';
+        document.getElementById('dark').style.display = 'block';
+
+
+    }
+    if(event.target.id == 'dark'){
+
+        document.getElementsByTagName("head")[0].childNodes[7]
+            .href = "http://localhost:63342/JS/theCalendar/style.css"
+        event.target.style.display = 'none';
+        document.getElementById('light').style.display = 'block';
+
+    }
+
+
+}
+
+// const nqkva = document.getElementById('dark');
+// nqkva.

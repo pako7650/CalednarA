@@ -6,7 +6,7 @@ body, html {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: darkgray;
+    background: aliceblue;
     user-select: none;
 }
 
@@ -29,7 +29,7 @@ html {
 header {
     display: flex;
     color: darkslategray;
-    background-color: darkgray;
+    background-color: aliceblue;
     justify-content: space-around;
     justify-items: center;
     align-items: center;
@@ -113,7 +113,7 @@ header {
     justify-items: center;
     align-items: center;
 
-    background-color: darkgray;
+    background-color: aliceblue;
     border-radius: 2rem;
     margin: 1rem;
 
@@ -129,7 +129,7 @@ header {
     color: red;
 }
 .weekDays:nth-child(6n+0){
-    color: aliceblue;
+    color: darkgray;
 }
 #monthDays{
     display: flex;
@@ -143,7 +143,7 @@ header {
     color: red;
 }
 .monthDays:nth-child(7n-1) {
-    color: aliceblue;
+    color: darkgray;
 }
 
 .monthDays{
@@ -181,8 +181,8 @@ header {
 
 #foot {
     display: flex;
-    color: whitesmoke;
-    background-color: darkgray;
+    color: darkgray;
+    background-color: whitesmoke;
     justify-content: space-around;
     justify-items: center;
     align-items: center;
@@ -191,7 +191,4 @@ header {
     margin: 1rem;
     font-size: 1.5rem;
     border-radius: 2rem;
-}
-#dark{
-    display: none;
 }
