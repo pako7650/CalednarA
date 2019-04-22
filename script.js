@@ -8,8 +8,8 @@ start from 0 */
 const monthDays = range(moment().add(counter, 'month').daysInMonth());//getting days in month
 const firstD = moment().startOf('month').format('d');//getting first day long version
 const lastD = moment().endOf('month').format('d');//getting latest day long version
-console.log(firstD);//logging first day
-console.log(lastD);//logging latest day
+// console.log(firstD);//logging first day
+// console.log(lastD);//logging latest day
 const elementsByClass = className => document.getElementsByClassName(className);//getting elements by className
 const weekDay = [...elementsByClass('weekDays')];//getting all elements with className 'weekDays'
 
@@ -25,11 +25,11 @@ let denEnd = 0;
 const prediOnload = Array(`${firstD}`-denStart-1)
     .fill()
     .map(() => denStart++);
-console.log(prediOnload);
+// console.log(prediOnload);
 const sledOnload = Array(7-lastD)
     .fill()
     .map(()=> (denEnd++)+1);
-console.log(sledOnload);
+// console.log(sledOnload);
 // let monthDaySpans = prediOnload.concat(monthDays).concat(sledOnload).map(monthDay => daysAdd.innerHTML +=//creating month days onload
 //     `<div class="monthDays">${monthDay}</div>`);
 let ne6toOnload = '';
@@ -47,10 +47,10 @@ function clicker(event) {/* clicker function checks if left arrow was selected a
 if not adds 1 to counter which is used down below..*/
     event.target.id === 'leftArrow' ? --counter : ++counter;//depending to pressed element count rise or fall
     const secondD = moment().add(counter, 'month').startOf('month').format('d');//getting first day short
-    console.log(secondD);
+    // console.log(secondD);
 // const secondDfull = moment().add(counter - 1, 'month').startOf('month').format('dddd');
     const secondLastD = moment().add(counter, 'month').endOf('month').format('d');//getting last day short
-    console.log(secondLastD);
+    // console.log(secondLastD);
 // const secondLastDfull = moment().add(counter - 1, 'month').endOf('month').format('dddd');
     let dnite = '';
     let dnitePredi = '';
@@ -100,10 +100,10 @@ if not adds 1 to counter which is used down below..*/
         // }
         return napred
     };
-    console.log(denStari());
-    console.log(denNovi());
+    // console.log(denStari());
+    // console.log(denNovi());
     // console.log(dnitePredi);
-    console.log(dnite);
+    // console.log(dnite);
     // console.log(dniteSled);
     // console.log(secondD);
     // console.log(secondLastD);
