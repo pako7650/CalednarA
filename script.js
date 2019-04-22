@@ -1,6 +1,6 @@
-const newMoment = moment().format('MMMM YYYY');//using moment!!!
+const newMoment = moment();//using moment!!!
 const displayDate = document.getElementById('date');//getting the date element from html
-displayDate.innerText = newMoment;//displaying da date
+displayDate.innerText = newMoment.format("MMMM YYYY");//displaying da date
 const daysAdd = document.getElementById("monthDays");//getting the element from the html
 const range = (N) => Array.from({length: N}, (v, k) => k + 1);//filling the array f-n
 let counter = 0;/*creating a counter variable has to be outside of the function because if it is inside always will
@@ -20,7 +20,7 @@ for (let arrow of arrows) {/* loop trough arrows variable to get both of them */
     arrow.addEventListener('click', clicker);/* while looping attach an event listener on each one, plus calling
     the clicker function*/
 }
-document.onkeydown = function(e) {//attaching keyboard events
+document.onkeydown = function (e) {//attaching keyboard events
     switch (e.keyCode) {
         case 37:
             document.getElementById('leftArrow').click();
@@ -36,26 +36,32 @@ document.onkeydown = function(e) {//attaching keyboard events
         //     break;
     }
 };
+
 let denStart = 0;
 let denEnd = 0;
-const prediOnload = Array(`${firstD}`-denStart-1)
+const prediOnload = Array(`${firstD}` - denStart - 1)
     .fill()
     .map(() => denStart++);
 // console.log(prediOnload);
-const sledOnload = Array(7-lastD)
+const sledOnload = Array(7 - lastD)
     .fill()
-    .map(()=> (denEnd++)+1);
+    .map(() => (denEnd++) + 1);
 // console.log(sledOnload);
 // let monthDaySpans = prediOnload.concat(monthDays).concat(sledOnload).map(monthDay => daysAdd.innerHTML +=//creating month days onload
 //     `<div class="monthDays">${monthDay}</div>`);
 let ne6toOnload = '';
 if (prediOnload == 0) {
-    ne6toOnload = monthDays.concat(sledOnload).map(den => daysAdd.innerHTML += `<div class="monthDays">${den}</div>`);
+    ne6toOnload = monthDays.concat(sledOnload).map(den => daysAdd.innerHTML +=
+        `<div data-day="${den} ${displayDate.innerText.split(' ').shift()}, ${displayDate.innerText.split(' ').pop()} " 
+class="monthDays">${den}</div>`);
 } else if (sledOnload == 0) {
-    ne6toOnload = prediOnload.concat(monthDays).map(den => daysAdd.innerHTML += `<div class="monthDays">${den}</div>`);
+    ne6toOnload = prediOnload.concat(monthDays).map(den => daysAdd.innerHTML +=
+        `<div data-day="${den} ${displayDate.innerText.split(' ').shift()}, ${displayDate.innerText.split(' ').pop()} " 
+class="monthDays">${den}</div>`);
 } else {
     ne6toOnload = prediOnload.concat(monthDays).concat(sledOnload).map(den => daysAdd.innerHTML +=
-        `<div class="monthDays">${den}</div>`);
+        `<div data-day="${den} ${displayDate.innerText.split(' ').shift()}, ${displayDate.innerText.split(' ').pop()} " 
+class="monthDays">${den}</div>`);
 }
 
 
@@ -74,8 +80,6 @@ if not adds 1 to counter which is used down below..*/
 
     let denNovi = '';
     let denStari = '';
-
-
 
 
     // if(event.target.id === "leftArrow"){
@@ -128,21 +132,26 @@ if not adds 1 to counter which is used down below..*/
 
 
     daysAdd.innerText = '';
-
+    displayDate.innerHTML = moment().add(counter, 'month').format('MMMM YYYY');/*.. to change the date's inner text to
+    previous or nex month*/
     let ne6to = '';
     if (denStari() == '') {
-        ne6to = dnite.concat(denNovi()).map(den => daysAdd.innerHTML += `<div class="monthDays">${den}</div>`);
+        ne6to = dnite.concat(denNovi()).map(den => daysAdd.innerHTML +=
+            `<div data-day="${den} ${displayDate.innerText.split(' ').shift()}, ${displayDate.innerText.split(' ').pop()} " 
+class="monthDays">${den}</div>`);
     } else if (denNovi() == '') {
-        ne6to = denStari().concat(dnite).map(den => daysAdd.innerHTML += `<div class="monthDays">${den}</div>`);
+        ne6to = denStari().concat(dnite).map(den => daysAdd.innerHTML +=
+            `<div data-day="${den} ${displayDate.innerText.split(' ').shift()}, ${displayDate.innerText.split(' ').pop()} " 
+class="monthDays">${den}</div>`);
     } else {
         ne6to = denStari().concat(dnite).concat(denNovi()).map(den => daysAdd.innerHTML +=
-            `<div class="monthDays">${den}</div>`);
+            `<div data-day="${den} ${displayDate.innerText.split(' ').shift()}, ${displayDate.innerText.split(' ').pop()} " 
+class="monthDays">${den}</div>`);
     }
 
     // console.log(ne6to);
 
-    displayDate.innerHTML = moment().add(counter, 'month').format('MMMM YYYY');/*.. to change the date's inner text to
-    previous or nex month*/
+
 
     // console.log(prazno);
     // console.log(secondDfull);
@@ -166,8 +175,8 @@ for (let mod of modes) {/* loop trough arrows variable to get both of them */
     the clicker function*/
 }
 
-function changer (event) {
-    if(event.target.id == 'light'){
+function changer(event) {
+    if (event.target.id == 'light') {
 
         document.getElementsByTagName("head")[0].childNodes[7]
             .href = "style1.css"
@@ -176,7 +185,7 @@ function changer (event) {
 
 
     }
-    if(event.target.id == 'dark'){
+    if (event.target.id == 'dark') {
 
         document.getElementsByTagName("head")[0].childNodes[7]
             .href = "style.css"
@@ -188,6 +197,20 @@ function changer (event) {
 
 }
 
-// const nqkva = document.getElementById('dark');
-// nqkva.
+const daysFrom = [...elementsByClass('monthDays')];
 
+for (let dayf of daysFrom) {
+
+    dayf.addEventListener('click', daysEvent);
+
+}
+
+function daysEvent(e) {
+    console.log('click')
+}
+
+document.addEventListener('click', function (event) {
+    if(event.target.className === 'monthDays') {
+        console.log(event.target.dataset)
+    }
+});
