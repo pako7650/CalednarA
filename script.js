@@ -2,15 +2,14 @@ const newMoment = moment();//using moment!!!
 const displayDate = document.getElementById('date');//getting the date element from html
 const idElements = element => document.getElementById(element);
 const daysAdd = idElements('monthDays');
-// const daysAdd = document.getElementById("monthDays");//getting the element from the html
+
 const range = (N) => Array.from({length: N}, (v, k) => k + 1);//filling the array f-n
 let counter = 0;/*creating a counter variable has to be outside of the function because if it is inside always will
 start from 0 */
 const monthDays = range(newMoment.add(counter, 'month').daysInMonth());//getting days in month
 const firstD = newMoment.startOf('month').format('d');//getting first day long version
 const lastD = newMoment.endOf('month').format('d');//getting latest day long version
-// console.log(firstD);//logging first day
-// console.log(lastD);//logging latest day
+
 const elementsByClass = className => document.getElementsByClassName(className);//getting elements by className
 const weekDay = [...elementsByClass('weekDays')];//getting all elements with className 'weekDays'
 
@@ -20,14 +19,13 @@ const closeBtn = idElements('close');
 
 
 const arrows = [...elementsByClass('buttonsSpan')];//getting elements by class name
-// const  = getArrows('buttonsSpan');/* getting specific class name 'buttons */
-
 
 for (let arrow of arrows) {/* loop trough arrows variable to get both of them */
 
     arrow.addEventListener('click', clicker);/* while looping attach an event listener on each one, plus calling
     the clicker function*/
 }
+
 displayDate.innerText = newMoment.format("MMMM YYYY");//displaying da date
 
 document.onkeydown = function (e) {//attaching keyboard events
@@ -56,9 +54,6 @@ const prediOnload = Array(`${firstD}` - denStart - 1)
 const sledOnload = Array(7 - lastD)
     .fill()
     .map(() => (denEnd++) + 1);
-// console.log(sledOnload);
-// let monthDaySpans = prediOnload.concat(monthDays).concat(sledOnload).map(monthDay => daysAdd.innerHTML +=//creating month days onload
-//     `<div class="monthDays">${monthDay}</div>`);
 
 function nonrepeat(element, neshto) {
     let htmlCont = '';
@@ -72,44 +67,11 @@ function nonrepeat(element, neshto) {
 }
 
 function xperiment(predi, sega, sled) {
-    // for (let i = 0; i < arguments.length; i++) {
-    //     for (let y = 0; y < arguments[i].length; y++) {
-    //         htmlCont+=`<div data-predi="${arguments[i][y]}" class="monthDays">${arguments[i][y]}</div>`;
-    //     }
-    // }
-    // console.log(htmlCont);
 
-    /*  nonrepeat(predi, 'predi');
-      nonrepeat(sega, 'sega');
-      nonrepeat(sled, 'sled');*/
-    // for (i in predi) {
-    // console.log(predi[i]);
-    //     htmlCont += `<div data-predi="${predi[i]}" class="monthDays">${predi[i]}</div>`;
-    // }
-    // for (j in sega) {
-    //     htmlCont += `<div id = 'active' data-day="${sega[j]}" class="monthDays">${sega[j]}</div>`;
-    // }
-    // for (s in sled) {
-    //     htmlCont += `<div data-sled="${sled[s]}" class="monthDays">${sled[s]}</div>`;
-    // }
     daysAdd.innerHTML = nonrepeat(predi, 'predi') + nonrepeat(sega, 'sega') + nonrepeat(sled, 'sled');
 }
 
 xperiment(prediOnload, monthDays, sledOnload);
-// let ne6toOnload = '';
-// if (prediOnload == 0) {
-//     ne6toOnload = monthDays.concat(sledOnload).map(den => daysAdd.innerHTML +=
-//         `<div data-day="${den} ${displayDate.innerText.split(' ').shift()}, ${displayDate.innerText.split(' ').pop()} "
-// class="monthDays">${den}</div>`);
-// } else if (sledOnload == 0) {
-//     ne6toOnload = prediOnload.concat(monthDays).map(den => daysAdd.innerHTML +=
-//         `<div data-day="${den} ${displayDate.innerText.split(' ').shift()}, ${displayDate.innerText.split(' ').pop()} "
-// class="monthDays">${den}</div>`);
-// } else {
-//     ne6toOnload = prediOnload.concat(monthDays).concat(sledOnload).map(den => daysAdd.innerHTML +=
-//         `<div data-day="${den} ${displayDate.innerText.split(' ').shift()}, ${displayDate.innerText.split(' ').pop()} "
-// class="monthDays">${den}</div>`);
-// }
 
 
 function clicker(event) {/* clicker function checks if left arrow was selected and if true removes 1 form the counter
@@ -128,17 +90,9 @@ if not adds 1 to counter which is used down below..*/
     let denNovi = '';
     let denStari = '';
 
-
-    // if(event.target.id === "leftArrow"){
     dnite = range(moment().add(`${counter}`, 'month').daysInMonth());//displaying the days based on month
     dnitePredi = range(moment().add(`${counter}` - 1, 'month').daysInMonth());//getting previous month's days
     dniteSled = range(moment().add(`${counter}` + 1, 'month').daysInMonth());//getting next month's days
-    // } else {
-    //     dnite = range(moment().add(`${counter}`, 'month').daysInMonth());//displaying the days based on month
-    //     dnitePredi = range(moment().add(`${counter}` - 1, 'month').daysInMonth());//getting previous month's days
-    //     dniteSled = range(moment().add(`${counter}`+1, 'month').daysInMonth());//getting next month's days
-    // }
-
 
     denStari = function () {
         let nazad = '';
@@ -152,8 +106,7 @@ if not adds 1 to counter which is used down below..*/
         }
         return nazad;
     };
-    // } else if (secondD == 1){
-    // console.log(denStari());
+
     denNovi = function () {
         let napred = '';
 
@@ -162,61 +115,17 @@ if not adds 1 to counter which is used down below..*/
         } else {
             napred = (dniteSled.slice(0, 7 - `${secondLastD}`));
         }
-        // else if(secondLastD == 1){
-        //     napred = (dniteSled.slice(0,`${secondLastD}`))
-        // } else {
-        //     napred=(dniteSled.slice(0,`${secondLastD}`-1));
-        // }
+
         return napred
     };
-    // console.log(denStari());
-    // console.log(denNovi());
-    // console.log(dnitePredi);
-    // console.log(dnite);
-    // console.log(dniteSled);
-    // console.log(secondD);
-    // console.log(secondLastD);
-
 
     daysAdd.innerText = '';
     displayDate.innerHTML = moment().add(counter, 'month').format('MMMM YYYY');/*.. to change the date's inner text to
 //     previous or nex month*/
-//     let ne6to = '';
-//     if (denStari() == '') {
-//         ne6to = dnite.concat(denNovi()).map(den => daysAdd.innerHTML +=
-//             `<div data-day="${den} ${displayDate.innerText.split(' ').shift()}, ${displayDate.innerText.split(' ').pop()} "
-// class="monthDays">${den}</div>`);
-//     } else if (denNovi() == '') {
-//         ne6to = denStari().concat(dnite).map(den => daysAdd.innerHTML +=
-//             `<div data-day="${den} ${displayDate.innerText.split(' ').shift()}, ${displayDate.innerText.split(' ').pop()} "
-// class="monthDays">${den}</div>`);
-//     } else {
-//         ne6to = denStari().concat(dnite).concat(denNovi()).map(den => daysAdd.innerHTML +=
-//             `<div data-day="${den} ${displayDate.innerText.split(' ').shift()}, ${displayDate.innerText.split(' ').pop()} "
-// class="monthDays">${den}</div>`);
-//     }
-
-    // console.log(ne6to);
 
     xperiment(denStari(), dnite, denNovi());
 
-
-    // console.log(prazno);
-    // console.log(secondDfull);
-    // console.log(secondLastDfull);
-    // return ne6to
-}
-
-
-// const calendarDaysToHtml = (days, className) => {//Zaki's greatest hint
-//     let html = '';
-//
-//     days.map(day => html += `<div class="${className}">${day}</div>`);
-//
-//     return html;
-// };
 const modes = [...elementsByClass('theme')];//getting elements by class name
-// const  = getArrows('buttonsSpan');/* getting specific class name 'buttons */
 for (let mod of modes) {/* loop trough arrows variable to get both of them */
 
     mod.addEventListener('click', changer);/* while looping attach an event listener on each one, plus calling
@@ -224,10 +133,9 @@ for (let mod of modes) {/* loop trough arrows variable to get both of them */
 }
 
 function changer(event) {
-    function moder(target, mode, element) {
-
-
-    }
+    // function moder(target, mode, element) {
+    //
+    // }
 
     if (event.target.id == 'light') {
 
@@ -250,18 +158,6 @@ function changer(event) {
 
 }
 
-// const daysFrom = idElements('active');
-//
-// for (let dayf in daysFrom) {
-//     // console.log(daysFrom[dayf]);
-//     // dayf.addEventListener('click', daysEvent);
-//
-// }
-//
-// function daysEvent(e) {
-//     console.log('click')
-// }
-
 document.addEventListener('click', function (event) {
     if (event.target.dataset.diff === 'sega') {
         // event.target
@@ -270,9 +166,15 @@ document.addEventListener('click', function (event) {
 
 });
 
-
 closeBtn.addEventListener('click', function () {
     modal.classList.add('hidden')
 
 
 });
+// const calendarDaysToHtml = (days, className) => {//Zaki's greatest hint
+//     let html = '';
+//
+//     days.map(day => html += `<div class="${className}">${day}</div>`);
+//
+//     return html;
+// };
