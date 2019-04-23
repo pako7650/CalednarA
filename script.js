@@ -125,52 +125,53 @@ if not adds 1 to counter which is used down below..*/
 
     xperiment(denStari(), dnite, denNovi());
 
-const modes = [...elementsByClass('theme')];//getting elements by class name
-for (let mod of modes) {/* loop trough arrows variable to get both of them */
+    const modes = [...elementsByClass('theme')];//getting elements by class name
+    for (let mod of modes) {/* loop trough arrows variable to get both of them */
 
-    mod.addEventListener('click', changer);/* while looping attach an event listener on each one, plus calling
+        mod.addEventListener('click', changer);/* while looping attach an event listener on each one, plus calling
     the clicker function*/
+    }
+
+    function changer(event) {
+        // function moder(target, mode, element) {
+        //
+        // }
+
+        if (event.target.id == 'light') {
+
+            document.getElementsByTagName("head")[0].childNodes[7]
+                .href = "style1.css"
+            event.target.style.display = 'none';
+            document.getElementById('dark').style.display = 'block';
+
+
+        }
+        if (event.target.id == 'dark') {
+
+            document.getElementsByTagName("head")[0].childNodes[7]
+                .href = "style.css"
+            event.target.style.display = 'none';
+            document.getElementById('light').style.display = 'block';
+
+        }
+
+
+    }
+
+    document.addEventListener('click', function (event) {
+        if (event.target.dataset.diff === 'sega') {
+            // event.target
+            modal.classList.remove('hidden');
+        }
+
+    });
+
+    closeBtn.addEventListener('click', function () {
+        modal.classList.add('hidden')
+
+
+    });
 }
-
-function changer(event) {
-    // function moder(target, mode, element) {
-    //
-    // }
-
-    if (event.target.id == 'light') {
-
-        document.getElementsByTagName("head")[0].childNodes[7]
-            .href = "style1.css"
-        event.target.style.display = 'none';
-        document.getElementById('dark').style.display = 'block';
-
-
-    }
-    if (event.target.id == 'dark') {
-
-        document.getElementsByTagName("head")[0].childNodes[7]
-            .href = "style.css"
-        event.target.style.display = 'none';
-        document.getElementById('light').style.display = 'block';
-
-    }
-
-
-}
-
-document.addEventListener('click', function (event) {
-    if (event.target.dataset.diff === 'sega') {
-        // event.target
-        modal.classList.remove('hidden');
-    }
-
-});
-
-closeBtn.addEventListener('click', function () {
-    modal.classList.add('hidden')
-
-
-});
 // const calendarDaysToHtml = (days, className) => {//Zaki's greatest hint
 //     let html = '';
 //
