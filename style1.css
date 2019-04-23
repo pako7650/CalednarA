@@ -226,16 +226,16 @@ header {
 /* Modal Content/Box */
 .modal-content {
     position: relative;
-    background-color: #fefefe;
+    background-color: aliceblue;
     margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
     border: 1px solid #888;
     width: 80%; /* Could be more or less, depending on screen size */
+    height: 80%;
 }
 
 /* The Close Button */
 #close {
-    color: #aaa;
+    color: darkslategray;
     position: absolute;
     font-size: 2rem;
     font-weight: bold;
@@ -248,8 +248,10 @@ header {
     color: black;
     text-decoration: none;
     cursor: pointer;
+    transform: rotate(15deg);
 }
 
 #close:active {
     transform: scale(0.9);
+
 }

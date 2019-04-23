@@ -270,6 +270,7 @@ document.addEventListener('click', function (event) {
 
 });
 
+
 closeBtn.addEventListener('click', function () {
     modal.classList.add('hidden')
 
