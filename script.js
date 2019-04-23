@@ -1,35 +1,45 @@
 const newMoment = moment();//using moment!!!
 const displayDate = document.getElementById('date');//getting the date element from html
-displayDate.innerText = newMoment.format("MMMM YYYY");//displaying da date
-const daysAdd = document.getElementById("monthDays");//getting the element from the html
+const idElements = element => document.getElementById(element);
+const daysAdd = idElements('monthDays');
+// const daysAdd = document.getElementById("monthDays");//getting the element from the html
 const range = (N) => Array.from({length: N}, (v, k) => k + 1);//filling the array f-n
 let counter = 0;/*creating a counter variable has to be outside of the function because if it is inside always will
 start from 0 */
-const monthDays = range(moment().add(counter, 'month').daysInMonth());//getting days in month
-const firstD = moment().startOf('month').format('d');//getting first day long version
-const lastD = moment().endOf('month').format('d');//getting latest day long version
+const monthDays = range(newMoment.add(counter, 'month').daysInMonth());//getting days in month
+const firstD = newMoment.startOf('month').format('d');//getting first day long version
+const lastD = newMoment.endOf('month').format('d');//getting latest day long version
 // console.log(firstD);//logging first day
 // console.log(lastD);//logging latest day
 const elementsByClass = className => document.getElementsByClassName(className);//getting elements by className
 const weekDay = [...elementsByClass('weekDays')];//getting all elements with className 'weekDays'
 
+const modal = idElements('myModal');
+
+const closeBtn = idElements('close');
+
+
 const arrows = [...elementsByClass('buttonsSpan')];//getting elements by class name
 // const  = getArrows('buttonsSpan');/* getting specific class name 'buttons */
+
+
 for (let arrow of arrows) {/* loop trough arrows variable to get both of them */
 
     arrow.addEventListener('click', clicker);/* while looping attach an event listener on each one, plus calling
     the clicker function*/
 }
+displayDate.innerText = newMoment.format("MMMM YYYY");//displaying da date
+
 document.onkeydown = function (e) {//attaching keyboard events
-    switch (e.keyCode) {
-        case 37:
-            document.getElementById('leftArrow').click();
+    switch (e.key) {
+        case "ArrowLeft":
+            idElements('leftArrow').click();
             break;
         // case 38:
         //     alert('up');
         //     break;
-        case 39:
-            document.getElementById('rightArrow').click();
+        case "ArrowRight":
+            idElements('rightArrow').click();
             break;
         // case 40:
         //     alert('down');
@@ -49,20 +59,57 @@ const sledOnload = Array(7 - lastD)
 // console.log(sledOnload);
 // let monthDaySpans = prediOnload.concat(monthDays).concat(sledOnload).map(monthDay => daysAdd.innerHTML +=//creating month days onload
 //     `<div class="monthDays">${monthDay}</div>`);
-let ne6toOnload = '';
-if (prediOnload == 0) {
-    ne6toOnload = monthDays.concat(sledOnload).map(den => daysAdd.innerHTML +=
-        `<div data-day="${den} ${displayDate.innerText.split(' ').shift()}, ${displayDate.innerText.split(' ').pop()} " 
-class="monthDays">${den}</div>`);
-} else if (sledOnload == 0) {
-    ne6toOnload = prediOnload.concat(monthDays).map(den => daysAdd.innerHTML +=
-        `<div data-day="${den} ${displayDate.innerText.split(' ').shift()}, ${displayDate.innerText.split(' ').pop()} " 
-class="monthDays">${den}</div>`);
-} else {
-    ne6toOnload = prediOnload.concat(monthDays).concat(sledOnload).map(den => daysAdd.innerHTML +=
-        `<div data-day="${den} ${displayDate.innerText.split(' ').shift()}, ${displayDate.innerText.split(' ').pop()} " 
-class="monthDays">${den}</div>`);
+
+function nonrepeat(element, neshto) {
+    let htmlCont = '';
+
+    for (i in element) {
+        htmlCont += `<div data-diff="${neshto}" data = "${neshto}" class="monthDays ${neshto}">${element[i]}</div>`;
+        // console.log(element[i])
+    }
+
+    return htmlCont;
 }
+
+function xperiment(predi, sega, sled) {
+    // for (let i = 0; i < arguments.length; i++) {
+    //     for (let y = 0; y < arguments[i].length; y++) {
+    //         htmlCont+=`<div data-predi="${arguments[i][y]}" class="monthDays">${arguments[i][y]}</div>`;
+    //     }
+    // }
+    // console.log(htmlCont);
+
+    /*  nonrepeat(predi, 'predi');
+      nonrepeat(sega, 'sega');
+      nonrepeat(sled, 'sled');*/
+    // for (i in predi) {
+    // console.log(predi[i]);
+    //     htmlCont += `<div data-predi="${predi[i]}" class="monthDays">${predi[i]}</div>`;
+    // }
+    // for (j in sega) {
+    //     htmlCont += `<div id = 'active' data-day="${sega[j]}" class="monthDays">${sega[j]}</div>`;
+    // }
+    // for (s in sled) {
+    //     htmlCont += `<div data-sled="${sled[s]}" class="monthDays">${sled[s]}</div>`;
+    // }
+    daysAdd.innerHTML = nonrepeat(predi, 'predi') + nonrepeat(sega, 'sega') + nonrepeat(sled, 'sled');
+}
+
+xperiment(prediOnload, monthDays, sledOnload);
+// let ne6toOnload = '';
+// if (prediOnload == 0) {
+//     ne6toOnload = monthDays.concat(sledOnload).map(den => daysAdd.innerHTML +=
+//         `<div data-day="${den} ${displayDate.innerText.split(' ').shift()}, ${displayDate.innerText.split(' ').pop()} "
+// class="monthDays">${den}</div>`);
+// } else if (sledOnload == 0) {
+//     ne6toOnload = prediOnload.concat(monthDays).map(den => daysAdd.innerHTML +=
+//         `<div data-day="${den} ${displayDate.innerText.split(' ').shift()}, ${displayDate.innerText.split(' ').pop()} "
+// class="monthDays">${den}</div>`);
+// } else {
+//     ne6toOnload = prediOnload.concat(monthDays).concat(sledOnload).map(den => daysAdd.innerHTML +=
+//         `<div data-day="${den} ${displayDate.innerText.split(' ').shift()}, ${displayDate.innerText.split(' ').pop()} "
+// class="monthDays">${den}</div>`);
+// }
 
 
 function clicker(event) {/* clicker function checks if left arrow was selected and if true removes 1 form the counter
@@ -106,7 +153,7 @@ if not adds 1 to counter which is used down below..*/
         return nazad;
     };
     // } else if (secondD == 1){
-
+    // console.log(denStari());
     denNovi = function () {
         let napred = '';
 
@@ -133,30 +180,31 @@ if not adds 1 to counter which is used down below..*/
 
     daysAdd.innerText = '';
     displayDate.innerHTML = moment().add(counter, 'month').format('MMMM YYYY');/*.. to change the date's inner text to
-    previous or nex month*/
-    let ne6to = '';
-    if (denStari() == '') {
-        ne6to = dnite.concat(denNovi()).map(den => daysAdd.innerHTML +=
-            `<div data-day="${den} ${displayDate.innerText.split(' ').shift()}, ${displayDate.innerText.split(' ').pop()} " 
-class="monthDays">${den}</div>`);
-    } else if (denNovi() == '') {
-        ne6to = denStari().concat(dnite).map(den => daysAdd.innerHTML +=
-            `<div data-day="${den} ${displayDate.innerText.split(' ').shift()}, ${displayDate.innerText.split(' ').pop()} " 
-class="monthDays">${den}</div>`);
-    } else {
-        ne6to = denStari().concat(dnite).concat(denNovi()).map(den => daysAdd.innerHTML +=
-            `<div data-day="${den} ${displayDate.innerText.split(' ').shift()}, ${displayDate.innerText.split(' ').pop()} " 
-class="monthDays">${den}</div>`);
-    }
+//     previous or nex month*/
+//     let ne6to = '';
+//     if (denStari() == '') {
+//         ne6to = dnite.concat(denNovi()).map(den => daysAdd.innerHTML +=
+//             `<div data-day="${den} ${displayDate.innerText.split(' ').shift()}, ${displayDate.innerText.split(' ').pop()} "
+// class="monthDays">${den}</div>`);
+//     } else if (denNovi() == '') {
+//         ne6to = denStari().concat(dnite).map(den => daysAdd.innerHTML +=
+//             `<div data-day="${den} ${displayDate.innerText.split(' ').shift()}, ${displayDate.innerText.split(' ').pop()} "
+// class="monthDays">${den}</div>`);
+//     } else {
+//         ne6to = denStari().concat(dnite).concat(denNovi()).map(den => daysAdd.innerHTML +=
+//             `<div data-day="${den} ${displayDate.innerText.split(' ').shift()}, ${displayDate.innerText.split(' ').pop()} "
+// class="monthDays">${den}</div>`);
+//     }
 
     // console.log(ne6to);
 
+    xperiment(denStari(), dnite, denNovi());
 
 
     // console.log(prazno);
     // console.log(secondDfull);
     // console.log(secondLastDfull);
-    return ne6to
+    // return ne6to
 }
 
 
@@ -176,6 +224,11 @@ for (let mod of modes) {/* loop trough arrows variable to get both of them */
 }
 
 function changer(event) {
+    function moder(target, mode, element) {
+
+
+    }
+
     if (event.target.id == 'light') {
 
         document.getElementsByTagName("head")[0].childNodes[7]
@@ -197,20 +250,28 @@ function changer(event) {
 
 }
 
-const daysFrom = [...elementsByClass('monthDays')];
-
-for (let dayf of daysFrom) {
-
-    dayf.addEventListener('click', daysEvent);
-
-}
-
-function daysEvent(e) {
-    console.log('click')
-}
+// const daysFrom = idElements('active');
+//
+// for (let dayf in daysFrom) {
+//     // console.log(daysFrom[dayf]);
+//     // dayf.addEventListener('click', daysEvent);
+//
+// }
+//
+// function daysEvent(e) {
+//     console.log('click')
+// }
 
 document.addEventListener('click', function (event) {
-    if(event.target.className === 'monthDays') {
-        console.log(event.target.dataset)
+    if (event.target.dataset.diff === 'sega') {
+        // event.target
+        modal.classList.remove('hidden');
     }
+
+});
+
+closeBtn.addEventListener('click', function () {
+    modal.classList.add('hidden')
+
+
 });
