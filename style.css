@@ -260,3 +260,7 @@ header {
 #close:active {
     transform: scale(0.9);
 }
+.active{
+    border: 1px solid black;
+
+}

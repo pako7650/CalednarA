@@ -250,7 +250,10 @@ header {
     cursor: pointer;
     transform: rotate(15deg);
 }
+.active{
+border: 1px solid black;
 
+}
 #close:active {
     transform: scale(0.9);
 

@@ -16,9 +16,11 @@ const weekDay = [...elementsByClass('weekDays')];//getting all elements with cla
 const modal = idElements('myModal');
 
 const closeBtn = idElements('close');
+const rightArrow = idElements('rightArrow');
 
-
+const leftArrow = idElements('leftArrow');
 const arrows = [...elementsByClass('buttonsSpan')];//getting elements by class name
+let currentElementIndex = null;
 
 for (let arrow of arrows) {/* loop trough arrows variable to get both of them */
 
@@ -28,22 +30,26 @@ for (let arrow of arrows) {/* loop trough arrows variable to get both of them */
 
 displayDate.innerText = newMoment.format("MMMM YYYY");//displaying da date
 
-document.onkeydown = function (e) {//attaching keyboard events
-    switch (e.key) {
-        case "ArrowLeft":
-            idElements('leftArrow').click();
-            break;
-        // case 38:
-        //     alert('up');
-        //     break;
-        case "ArrowRight":
-            idElements('rightArrow').click();
-            break;
-        // case 40:
-        //     alert('down');
-        //     break;
-    }
-};
+
+document.addEventListener('keydown', asd)
+
+
+// document.onkeydown = function (e) {//attaching keyboard events
+//     switch (e.key) {
+//         case "ArrowLeft":
+//             idElements('leftArrow').click();
+//             break;
+//         // case 38:
+//         //     alert('up');
+//         //     break;
+//         case "ArrowRight":
+//             idElements('rightArrow').click();
+//             break;
+//         // case 40:
+//         //     alert('down');
+//         //     break;
+//     }
+// };
 
 let denStart = 0;
 let denEnd = 0;
@@ -57,16 +63,29 @@ const sledOnload = Array(7 - lastD)
 
 function nonrepeat(element, neshto) {
     let htmlCont = '';
+    let index = 0;
+    if(element.length > 7) {
 
-    for (i in element) {
-        htmlCont += `<div data-diff="${neshto}" data = "${neshto}" class="monthDays ${neshto}">${element[i]}</div>`;
-        // console.log(element[i])
+
+        for (i in element) {
+            // console.log(i);
+            htmlCont += `<div data-diff="${neshto}" index ="${index}" data = "${neshto}" class="monthDays ${neshto}">${element[i]}</div>`;
+            // console.log(element[i])
+            index++;
+        }
+    }else{
+        for (i in element) {
+            // console.log(i);
+            htmlCont += `<div data-diff="${neshto}" data = "${neshto}" class="monthDays ${neshto}">${element[i]}</div>`;
+            // console.log(element[i])
+            index++;
+        }
     }
-
     return htmlCont;
 }
 
 function xperiment(predi, sega, sled) {
+    // console.log(sega);
 
     daysAdd.innerHTML = nonrepeat(predi, 'predi') + nonrepeat(sega, 'sega') + nonrepeat(sled, 'sled');
 }
@@ -74,10 +93,105 @@ function xperiment(predi, sega, sled) {
 xperiment(prediOnload, monthDays, sledOnload);
 
 
+const allDaysArr = document.getElementsByClassName('monthDays');
+let currentMonthDays = Array.from(document.querySelectorAll('[data="sega"]'));
+// console.log(currentMonthDays);
+allDaysArr[0].classList.add("active");
+currentElementIndex = +document.getElementsByClassName('active')[0].attributes.index.value;
+
+
+function asd() {
+    // console.log(event.keyCode);
+    if (event.keyCode === 27) {
+        closeBtn.click();
+    }
+    if (event.keyCode === 39) {
+        rightArrow.click();
+        currentMonthDays = Array.from(document.querySelectorAll('[data="sega"]'));
+        currentMonthDays[0].classList.add('active');
+    }
+    if (event.keyCode === 37) {
+        leftArrow.click();
+        currentMonthDays = Array.from(document.querySelectorAll('[data="sega"]'));
+        currentMonthDays[0].classList.add('active');
+    }
+    if (event.keyCode === 100) {
+        currentElementIndex = +document.getElementsByClassName('active')[0].attributes.index.value;
+        if (currentElementIndex === 0) {
+            currentElementIndex = 0;
+            // document.getElementsByClassName('active')[0].classList.remove('active');
+            // allDaysArr[currentElementIndex].classList.add('active');
+            leftArrow.click();
+            // currentMonthDays = Array.from(document.querySelectorAll('[data="sega"]'));
+            // currentMonthDays[currentElementIndex].classList.add('active');
+        } else {
+            document.getElementsByClassName('active')[0].classList.remove('active');
+            currentMonthDays[currentElementIndex - 1].classList.add('active');
+
+        }
+        // leftArrow.click();
+    }
+    if (event.keyCode === 102) {
+        currentElementIndex = +document.getElementsByClassName('active')[0].attributes.index.value;
+        // console.log(currentElementIndex, currentMonthDays.length)
+        if (currentElementIndex === monthDays.length - 1) {
+            currentElementIndex = 0;
+            // document.getElementsByClassName('active')[0].classList.remove('active');
+            // allDaysArr[currentElementIndex].classList.add('active');
+            rightArrow.click();
+            currentMonthDays = Array.from(document.querySelectorAll('[data="sega"]'));
+            currentMonthDays[currentElementIndex].classList.add('active');
+        } else {
+            document.getElementsByClassName('active')[0].classList.remove('active');
+            // console.log(currentMonthDays[currentElementIndex + 1])
+            // console.log(currentMonthDays[currentElementIndex + 1]);
+
+            currentMonthDays[currentElementIndex + 1].classList.add('active');
+        }
+    }
+    if (event.keyCode === 104) {
+        currentElementIndex = +document.getElementsByClassName('active')[0].attributes.index.value;
+        // console.log(currentElementIndex, currentMonthDays.length);
+        const nextIndex = currentElementIndex - 7;
+        if (nextIndex < 0) {
+            // document.getElementsByClassName('active')[0].classList.remove('active');
+            leftArrow.click();
+            currentElementIndex = 0;
+            // allDaysArr[currentElementIndex].classList.add('active');
+            currentMonthDays = Array.from(document.querySelectorAll('[data="sega"]'));
+            currentMonthDays[currentElementIndex].classList.add('active');
+        } else {
+            document.getElementsByClassName('active')[0].classList.remove('active');
+            currentMonthDays[currentElementIndex - 7].classList.add('active');
+        }
+    }
+
+
+    if (event.keyCode === 98) {
+        currentElementIndex = +document.getElementsByClassName('active')[0].attributes.index.value;
+        // console.log(currentElementIndex, currentMonthDays.length);
+        const nextIndex = currentElementIndex + 7;
+        if (nextIndex > currentMonthDays.length) {
+            // document.getElementsByClassName('active')[0].classList.remove('active');
+            rightArrow.click();
+            currentElementIndex = 0;
+            // allDaysArr[currentElementIndex].classList.add('active');
+            currentMonthDays = Array.from(document.querySelectorAll('[data="sega"]'));
+            currentMonthDays[currentElementIndex].classList.add('active');
+        } else {
+            document.getElementsByClassName('active')[0].classList.remove('active');
+            currentMonthDays[currentElementIndex + 7].classList.add('active');
+        }
+    }
+}
+
+
 function clicker(event) {/* clicker function checks if left arrow was selected and if true removes 1 form the counter
 if not adds 1 to counter which is used down below..*/
     event.target.id === 'leftArrow' ? --counter : ++counter;//depending to pressed element count rise or fall
     const secondD = moment().add(counter, 'month').startOf('month').format('d');//getting first day short
+
+
     // console.log(secondD);
 // const secondDfull = moment().add(counter - 1, 'month').startOf('month').format('dddd');
     const secondLastD = moment().add(counter, 'month').endOf('month').format('d');//getting last day short
@@ -124,6 +238,10 @@ if not adds 1 to counter which is used down below..*/
 //     previous or nex month*/
 
     xperiment(denStari(), dnite, denNovi());
+    currentMonthDays = Array.from(document.querySelectorAll('[data="sega"]'));
+    // console.log(currentElementIndex);
+    currentMonthDays[0].classList.add('active');
+    // console.log(currentMonthDays);
 }
 
 const modes = [...elementsByClass('theme')];//getting elements by class name
@@ -160,17 +278,19 @@ function changer(event) {
 
 document.addEventListener('click', function (event) {
     if (event.target.dataset.diff === 'sega') {
-        // event.target
+        document.getElementsByClassName('active')[0].classList.remove('active');
+        event.target.classList.add('active')
         modal.classList.remove('hidden');
+
     }
 
 });
 
 closeBtn.addEventListener('click', function () {
     modal.classList.add('hidden')
-
-
+    // console.log(event.keyCode)
 });
+
 
 // const calendarDaysToHtml = (days, className) => {//Zaki's greatest hint
 //     let html = '';
