@@ -1,4 +1,4 @@
-const newMoment = moment();//using moment!!!
+// const moment() = moment();//using moment!!!
 const displayDate = document.getElementById('date');//getting the date element from html
 const idElements = element => document.getElementById(element);
 const daysAdd = idElements('monthDays');
@@ -6,9 +6,10 @@ const daysAdd = idElements('monthDays');
 const range = (N) => Array.from({length: N}, (v, k) => k + 1);//filling the array f-n
 let counter = 0;/*creating a counter variable has to be outside of the function because if it is inside always will
 start from 0 */
-const monthDays = range(newMoment.add(counter, 'month').daysInMonth());//getting days in month
-const firstD = newMoment.startOf('month').format('d');//getting first day long version
-const lastD = newMoment.endOf('month').format('d');//getting latest day long version
+const monthDays = range(moment().add(counter, 'month').daysInMonth());//getting days in month
+const prevMonthDays = range(moment().add(counter - 1, 'month').daysInMonth());//getting days in month
+const firstD = moment().startOf('month').format('d');//getting first day long version
+const lastD = moment().endOf('month').format('d');//getting latest day long version
 
 const elementsByClass = className => document.getElementsByClassName(className);//getting elements by className
 const weekDay = [...elementsByClass('weekDays')];//getting all elements with className 'weekDays'
@@ -28,44 +29,14 @@ for (let arrow of arrows) {/* loop trough arrows variable to get both of them */
     the clicker function*/
 }
 
-displayDate.innerText = newMoment.format("MMMM YYYY");//displaying da date
+displayDate.innerText = moment().format("MMMM YYYY");//displaying da date
 
 
 document.addEventListener('keydown', asd)
 
-
-// document.onkeydown = function (e) {//attaching keyboard events
-//     switch (e.key) {
-//         case "ArrowLeft":
-//             idElements('leftArrow').click();
-//             break;
-//         // case 38:
-//         //     alert('up');
-//         //     break;
-//         case "ArrowRight":
-//             idElements('rightArrow').click();
-//             break;
-//         // case 40:
-//         //     alert('down');
-//         //     break;
-//     }
-// };
-
 let denStart = 0;
 let denEnd = 0;
-const prediOnload = function (){
-    if(`${firstD}`<1) {
-        Array(6 - `${firstD}`)
-            .fill()
-            .map(() => denStart++);
-    }else if (`${firstD}`===1){
-        denStart = 0;
-    } else {
-        Array(`${firstD}` - denStart - 1)
-            .fill()
-            .map(() => denStart++);
-    }
-};
+const prediOnload = prevMonthDays.slice(-(firstD - 1));
 // console.log(prediOnload);
 const sledOnload = Array(7 - lastD)
     .fill()
@@ -74,7 +45,7 @@ const sledOnload = Array(7 - lastD)
 function nonrepeat(element, neshto) {
     let htmlCont = '';
     let index = 0;
-    if(element.length > 7) {
+    if (element.length > 7) {
 
 
         for (i in element) {
@@ -83,7 +54,7 @@ function nonrepeat(element, neshto) {
             // console.log(element[i])
             index++;
         }
-    }else{
+    } else {
         for (i in element) {
             // console.log(i);
             htmlCont += `<div data-diff="${neshto}" data = "${neshto}" class="monthDays ${neshto}">${element[i]}</div>`;
@@ -106,7 +77,7 @@ xperiment(prediOnload, monthDays, sledOnload);
 const allDaysArr = document.getElementsByClassName('monthDays');
 let currentMonthDays = Array.from(document.querySelectorAll('[data="sega"]'));
 // console.log(currentMonthDays);
-allDaysArr[0].classList.add("active");
+currentMonthDays[0].classList.add("active");
 currentElementIndex = +document.getElementsByClassName('active')[0].attributes.index.value;
 
 
