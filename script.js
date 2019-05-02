@@ -53,9 +53,19 @@ document.addEventListener('keydown', asd)
 
 let denStart = 0;
 let denEnd = 0;
-const prediOnload = Array(`${firstD}` - denStart - 1)
-    .fill()
-    .map(() => denStart++);
+const prediOnload = function (){
+    if(`${firstD}`<1) {
+        Array(6 - `${firstD}`)
+            .fill()
+            .map(() => denStart++);
+    }else if (`${firstD}`===1){
+        denStart = 0;
+    } else {
+        Array(`${firstD}` - denStart - 1)
+            .fill()
+            .map(() => denStart++);
+    }
+};
 // console.log(prediOnload);
 const sledOnload = Array(7 - lastD)
     .fill()
