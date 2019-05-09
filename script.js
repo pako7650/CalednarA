@@ -1,26 +1,31 @@
-// const moment() = moment();//using moment!!!
-const displayDate = document.getElementById('date');//getting the date element from html
-const idElements = element => document.getElementById(element);
-const daysAdd = idElements('monthDays');
-
+/////////////////////////////////////////////////////////////////////////////////////
+//Helpers
+const getElementsByID = element => document.getElementById(element);//getting elements by ID
+const getElementsByClassName = className => document.getElementsByClassName(className);//getting elements by className
 const range = (N) => Array.from({length: N}, (v, k) => k + 1);//filling the array f-n
+
+/////////////////////////////////////////////////////////////////////////////////////
+//Globals
 let counter = 0;/*creating a counter variable has to be outside of the function because if it is inside always will
 start from 0 */
+
+
+const displayDate = getElementsByID('date');//getting the date element from html
+const daysAdd = getElementsByID('monthDays');
+const darkTheme = getElementsByID('dark');
+const lightTheme = getElementsByID('light');
 const monthDays = range(moment().add(counter, 'month').daysInMonth());//getting days in month
 const prevMonthDays = range(moment().add(counter - 1, 'month').daysInMonth());//getting days in month
 const firstD = moment().startOf('month').format('d');//getting first day long version
 const lastD = moment().endOf('month').format('d');//getting latest day long version
+const weekDay = [...getElementsByClassName('weekDays')];//getting all elements with className 'weekDays'
+const rightArrow = getElementsByID('rightArrow');
+const leftArrow = getElementsByID('leftArrow');
+const arrows = [...getElementsByClassName('buttonsSpan')];//getting elements by class name
+const modal = getElementsByID('myModal');
+const closeBtn = getElementsByID('close');
 
-const elementsByClass = className => document.getElementsByClassName(className);//getting elements by className
-const weekDay = [...elementsByClass('weekDays')];//getting all elements with className 'weekDays'
 
-const modal = idElements('myModal');
-
-const closeBtn = idElements('close');
-const rightArrow = idElements('rightArrow');
-
-const leftArrow = idElements('leftArrow');
-const arrows = [...elementsByClass('buttonsSpan')];//getting elements by class name
 let currentElementIndex = null;
 
 for (let arrow of arrows) {/* loop trough arrows variable to get both of them */
@@ -32,7 +37,7 @@ for (let arrow of arrows) {/* loop trough arrows variable to get both of them */
 displayDate.innerText = moment().format("MMMM YYYY");//displaying da date
 
 
-document.addEventListener('keydown', asd)
+document.addEventListener('keydown', keyboardController);
 
 let denStart = 0;
 let denEnd = 0;
@@ -51,7 +56,7 @@ function nonrepeat(element, neshto) {
         for (i in element) {
             // console.log(i);
             htmlCont += `<div data-diff="${neshto}" index ="${index}" data = "${neshto}" class="monthDays ${neshto}">${element[i]}</div>`;
-            // console.log(element[i])
+            // SEE UPPER ROW, INDEX AND DATA ARE NOT ALLOWED SAME ON 65 ROW
             index++;
         }
     } else {
@@ -81,7 +86,7 @@ currentMonthDays[0].classList.add("active");
 currentElementIndex = +document.getElementsByClassName('active')[0].attributes.index.value;
 
 
-function asd() {
+function keyboardController() {
     // console.log(event.keyCode);
     if (event.keyCode === 27) {
         closeBtn.click();
@@ -178,12 +183,12 @@ if not adds 1 to counter which is used down below..*/
     const secondLastD = moment().add(counter, 'month').endOf('month').format('d');//getting last day short
     // console.log(secondLastD);
 // const secondLastDfull = moment().add(counter - 1, 'month').endOf('month').format('dddd');
-    let dnite = '';
+//     let dnite = '';
     let dnitePredi = '';
     let dniteSled = '';
 
-    let denNovi = '';
-    let denStari = '';
+    // let denNovi = '';
+    // let denStari = '';
 
     dnite = range(moment().add(`${counter}`, 'month').daysInMonth());//displaying the days based on month
     dnitePredi = range(moment().add(`${counter}` - 1, 'month').daysInMonth());//getting previous month's days
@@ -194,7 +199,7 @@ if not adds 1 to counter which is used down below..*/
         if (`${secondD}` < 1) {
             nazad = dnitePredi.slice(-6 - `${secondD}`);
             //     nazad = dnitePredi.slice(-`${secondD}`);
-        } else if (`${secondD}` == 1) {
+        } else if (`${secondD}` === 1) {
             nazad = '';
         } else {
             nazad = dnitePredi.slice(1 - `${secondD}`);
@@ -205,7 +210,7 @@ if not adds 1 to counter which is used down below..*/
     denNovi = function () {
         let napred = '';
 
-        if (`${secondLastD}` == 0) {
+        if (`${secondLastD}` === 0) {
             napred = '';
         } else {
             napred = (dniteSled.slice(0, 7 - `${secondLastD}`));
@@ -225,33 +230,34 @@ if not adds 1 to counter which is used down below..*/
     // console.log(currentMonthDays);
 }
 
-const modes = [...elementsByClass('theme')];//getting elements by class name
+const modes = [...getElementsByClassName('theme')];//getting elements by class name
 for (let mod of modes) {/* loop trough arrows variable to get both of them */
 
-    mod.addEventListener('click', changer);/* while looping attach an event listener on each one, plus calling
+    mod.addEventListener('click', themeChager);/* while looping attach an event listener on each one, plus calling
     the clicker function*/
 }
 
 
-function changer(event) {
+function themeChager(event) {
     // function moder(target, mode, element) {
     //
     // }
-    if (event.target.id == 'light') {
+
+    if (event.target.id === 'light') {
 
         document.getElementsByTagName("head")[0].childNodes[7]
-            .href = "style1.css"
+            .href = "style1.css";
         event.target.style.display = 'none';
-        document.getElementById('dark').style.display = 'block';
+        darkTheme.style.display = 'flex';
 
 
     }
-    if (event.target.id == 'dark') {
+    if (event.target.id === 'dark') {
 
         document.getElementsByTagName("head")[0].childNodes[7]
-            .href = "style.css"
+            .href = "style.css";
         event.target.style.display = 'none';
-        document.getElementById('light').style.display = 'block';
+        lightTheme.style.display = 'flex';
 
     }
 }
@@ -260,7 +266,7 @@ function changer(event) {
 document.addEventListener('click', function (event) {
     if (event.target.dataset.diff === 'sega') {
         document.getElementsByClassName('active')[0].classList.remove('active');
-        event.target.classList.add('active')
+        event.target.classList.add('active');
         modal.classList.remove('hidden');
 
     }
